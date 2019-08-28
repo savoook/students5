@@ -10,15 +10,15 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
-    <link rel="stylesheet" href="../../style.css">
+    <title>Дисциплины</title>
+    <link rel="stylesheet" href="../../resourses/css/style.css">
 </head>
 <body>
 <div>
-    <a href="#" class="logout">Logout</a>
+    <a href="/logout" class="logout">Logout</a>
 </div>
 <div>
-    <a href="../index.html" class="first">На главную</a>
+    <a href="../index.jsp" class="first">На главную</a>
 </div>
 <div>
     <a href="#" class="back">Назад</a>

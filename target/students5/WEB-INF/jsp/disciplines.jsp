@@ -1,16 +1,24 @@
+<%--
+  Created by IntelliJ IDEA.
+  User: User
+  Date: 23.08.2019
+  Time: 20:37
+  To change this template use File | Settings | File Templates.
+--%>
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
-    <link rel="stylesheet" href="../style.css">
+    <title>Дисциплины</title>
+    <link rel="stylesheet" href="../../resourses/css/style.css">
 </head>
 <body>
 <div>
-    <a href="#" class="logout">Logout</a>
+    <a href="/logout" class="logout">Logout</a>
 </div>
 <div>
-    <a href="../index.html" class="first">На главную</a>
+    <a href="../index.jsp" class="first">На главную</a>
 </div>
 <div>
     <a href="#" class="back">Назад</a>
@@ -47,13 +55,13 @@
         <div class="admin-bottom">
 
             <form action="#">
-            <button>Создать дисциплину...</button>
+                <button>Создать дисциплину...</button>
             </form>
             <form action="#">
-            <button>Модифицировать дисциплину...</button>
+                <button>Модифицировать дисциплину...</button>
             </form>
             <form action="#">
-            <button>Удалить выбранную дисциплину</button>
+                <button>Удалить выбранную дисциплину</button>
             </form>
         </div>
     </div>
