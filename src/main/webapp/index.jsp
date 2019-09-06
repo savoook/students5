@@ -19,7 +19,7 @@
         <a href="/disciplines" class="disciplines">Дисциплины</a>
     </span>
     <span>
-        <a href="/semestrs" class="semestrs">Семестры</a>
+        <a href="/terms" class="semestrs">Семестры</a>
     </span>
 </div>
 </body>
