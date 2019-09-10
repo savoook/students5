@@ -26,7 +26,7 @@ h2 {
 }
 
 .container {
-    max-width: 1200px;
+    max-width: 1400px;
     margin: 0 auto;
 }
 
@@ -46,8 +46,11 @@ table {
     border-collapse: collapse;
 }
 
-td {
+
+td, th {
     border: 2px solid black;
+    width: 200px;
+    text-align: center;
 }
 
 .buttonsColumn {
@@ -66,6 +69,21 @@ input[type =button] {
     /*float: right;*/
     width: 400px;
     vertical-align: top;
-/*horiz-align: right;*/
+    /*horiz-align: right;*/
     left: 200px;
+}
+
+.studentsButton {
+    float: right;
+}
+
+.clearfix {
+    content: " ";
+    display: table;
+    clear: both;
+}
+
+input[type=checkbox] {
+    transform: scale(1.9);
+    margin: auto;
 }

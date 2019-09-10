@@ -1,21 +1,20 @@
 package entity;
 
-import java.awt.*;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
-public class Tern {
+public class Term {
     private int id;
     private String tern;
     private String duration;
     private int status = 1;
     private List<Discipline> disciplines = new ArrayList<>();
 
-    public Tern() {
+    public Term() {
     }
 
-    public Tern(int id, String tern, String duration, int status, List<Discipline> disciplines) {
+    public Term(int id, String tern, String duration, int status, List<Discipline> disciplines) {
         this.id = id;
         this.tern = tern;
         this.duration = duration;
@@ -67,7 +66,7 @@ public class Tern {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        Tern tern1 = (Tern) o;
+        Term tern1 = (Term) o;
         return id == tern1.id &&
                 status == tern1.status &&
                 Objects.equals(tern, tern1.tern) &&

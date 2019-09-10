@@ -6,6 +6,9 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@page isELIgnored="false" %>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -26,36 +29,22 @@
 <div class="boxSite">
     <div class="box">Система управления студентами и их успеваемостью</div>
 
-    <div class="firstRow">
-        <div class="table">
-            <div class="table-row">
-                <div class="table-cellH checkbox"></div>
-                <div class="table-cellH secondName">Наименование дисциплины</div>
-            </div>
-            <div class="table-row">
-                <div class="table-cell checkbox">
-                    <fieldset>
-                        <input type="checkbox">
-                    </fieldset>
+    <c:forEach items="${disciplines}" var="d">
+        <div class="firstRow">
+            <div class="table">
+                <div class="table-row">
+                    <div class="table-cellH checkbox"></div>
+                    <div class="table-cellH secondName">${d.discipline}</div>
                 </div>
-                <div class="table-cell">Высшая математика</div>
-            </div>
-            <div class="table-row">
-                <div class="table-cell">
-                    <fieldset>
-                        <input type="checkbox">
-                    </fieldset>
-                </div>
-                <div class="table-cell">История Науки и Техники</div>
             </div>
         </div>
-    </div>
+    </c:forEach>
 
     <div class="secondRow">
         <div class="admin-bottom">
 
-            <form action="#">
-                <button>Создать дисциплину...</button>
+            <form action="/disciplineCreate">
+                <input type="submit" value="Создать дисциплину...">
             </form>
             <form action="#">
                 <button>Модифицировать дисциплину...</button>
