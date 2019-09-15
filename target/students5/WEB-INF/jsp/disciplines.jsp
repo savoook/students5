@@ -7,21 +7,24 @@
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-<%@page isELIgnored="false" %>
+<%@ page isELIgnored="false" %>
+
 
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Дисциплины</title>
-    <link rel="stylesheet" href="../../resourses/css/style.css">
+    <title>Title</title>
+    <link rel="stylesheet" href="../../resources/css/style.css">
+    <script src="../../resources/js/functions.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 </head>
 <body>
 <div>
-    <a href="/logout" class="logout">Logout</a>
+    <a href="#" class="logout">Logout</a>
 </div>
 <div>
-    <a href="../index.jsp" class="first">На главную</a>
+    <a href="../index.html" class="first">На главную</a>
 </div>
 <div>
     <a href="#" class="back">Назад</a>
@@ -29,26 +32,37 @@
 <div class="boxSite">
     <div class="box">Система управления студентами и их успеваемостью</div>
 
-    <c:forEach items="${disciplines}" var="d">
-        <div class="firstRow">
-            <div class="table">
-                <div class="table-row">
-                    <div class="table-cellH checkbox"></div>
-                    <div class="table-cellH secondName">${d.discipline}</div>
-                </div>
+    <div class="firstRow">
+        <div class="table">
+            <div class="table-row">
+                <div class="table-cellH checkbox"></div>
+                <div class="table-cellH secondName">Наименование дисциплины</div>
             </div>
+
+            <c:forEach items="${disciplines}" var="d">
+                <div class="table-row">
+                    <div class="table-cell checkbox">
+                        <fieldset>
+                            <input type="checkbox">
+                        </fieldset>
+                    </div>
+                    <div class="table-cell">${d.discipline}</div>
+                </div>
+            </c:forEach>
+
         </div>
-    </c:forEach>
+    </div>
 
     <div class="secondRow">
         <div class="admin-bottom">
 
-            <form action="/disciplineCreate">
+            <form action="/create-discipline" method="get">
                 <input type="submit" value="Создать дисциплину...">
             </form>
-            <form action="#">
-                <button>Модифицировать дисциплину...</button>
-            </form>
+
+            <input type="submit" onclick="modifingDiscipline()" value="Модифицировать дисциплину">
+            <form action="#"></form>
+
             <form action="#">
                 <button>Удалить выбранную дисциплину</button>
             </form>

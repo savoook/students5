@@ -87,4 +87,37 @@ public class DBManager {
             e.printStackTrace();
         }
     }
+    public static void createStudents(String newSurname,String newName,String newGroup,String newDate) {
+        try {
+            Class.forName("com.mysql.jdbc.Driver");
+            Connection con = DriverManager.getConnection(
+                    "jdbc:mysql://localhost/students?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC", "root", "vitaly");
+            Statement stmt = con.createStatement();
+            stmt.execute("INSERT INTO `student` (`surname`, `name`, `group`, `date`) VALUES ('"+newSurname+"', '"+newName+"', '"+newGroup+"', '"+newDate+"')\n;");
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+    public static List<Student> getAllActiveStudents() {
+        ArrayList<Student> students = new ArrayList<>();
+        try {
+            Class.forName("com.mysql.jdbc.Driver");
+            Connection con = DriverManager.getConnection(
+                    "jdbc:mysql://localhost/students?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC", "root", "vitaly");
+            Statement stmt = con.createStatement();
+            ResultSet rs = stmt.executeQuery("select * from student where status = 1");
+            while (rs.next()) {
+                Student student = new Student();
+                student.setId(rs.getInt("id"));
+                student.setSurname(rs.getString("surname"));
+                student.setName(rs.getString("name"));
+                student.setGroup(rs.getString("group"));
+                student.setDate(rs.getString("date"));
+                students.add(student);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return students;
+    }
 }
