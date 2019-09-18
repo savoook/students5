@@ -21,3 +21,4 @@ public class DeleteDisciplineController extends HttpServlet {
         req.getRequestDispatcher("/WEB-INF/jsp/disciplineDelete.jsp").forward(req, resp);
     }
 }
+//1
