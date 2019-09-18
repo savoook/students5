@@ -15,8 +15,8 @@
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
-    <link rel="stylesheet" href="../../resources/css/style.css">
-    <script src="../../resources/js/functions.js"></script>
+    <link rel="stylesheet" href="../../resourses/css/style.css">
+    <script src="../../resourses/js/functions.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 </head>
 <body>
@@ -24,7 +24,7 @@
     <a href="#" class="logout">Logout</a>
 </div>
 <div>
-    <a href="../index.html" class="first">На главную</a>
+    <a href="/index.jsp" class="first">На главную</a>
 </div>
 <div>
     <a href="#" class="back">Назад</a>
@@ -43,7 +43,7 @@
                 <div class="table-row">
                     <div class="table-cell checkbox">
                         <fieldset>
-                            <input type="checkbox">
+                            <input type="checkbox" value="${d.id}">
                         </fieldset>
                     </div>
                     <div class="table-cell">${d.discipline}</div>
@@ -56,15 +56,19 @@
     <div class="secondRow">
         <div class="admin-bottom">
 
-            <form action="/create-discipline" method="get">
+            <form action="/disciplineCreate" method="get">
                 <input type="submit" value="Создать дисциплину...">
             </form>
 
-            <input type="submit" onclick="modifingDiscipline()" value="Модифицировать дисциплину">
-            <form action="#"></form>
+            <input type="submit" onclick="modifyDiscipline()" value="Модифицировать дисциплину">
+            <form action="/disciplineModify" id="modifDiscForm">
+                <input type="hidden" name="idModifDisc" id="idModifDisc">
+            </form>
 
-            <form action="#">
-                <button>Удалить выбранную дисциплину</button>
+
+                <input type="submit" onclick="deleteDiscipline()" value="Удалить выбранную дисциплину">
+            <form action="/disciplineDelete" id="idDeleteForm">
+                <input type="hidden" name="idDeleteDisc" id="idDeleteDisc">
             </form>
         </div>
     </div>

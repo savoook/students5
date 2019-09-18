@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <title>Система управления</title>
-    <link rel="stylesheet" href="../resourses/css/style.css">
+    <link rel="stylesheet" href="resourses/css/style.css">
 </head>
 <body>
 <div>

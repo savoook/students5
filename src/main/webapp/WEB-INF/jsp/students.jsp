@@ -6,12 +6,22 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="f" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <title>Студенты</title>
-    <link rel="stylesheet" href="../../resourses/css/my_style.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="../../resourses/lib/jquery-ui-1.12.1/jquery-ui.js"></script>
+    <link rel="stylesheet" href="../../resourses/css/style.css">
+    <link rel="stylesheet" href="../../resourses/lib/jquery-ui-1.12.1/jquery-ui.css">
+    <script>
+        $(function () {
+            $("#date").datepicker();
+        });
+    </script>
 </head>
 <body>
 <h2>Система управления студентами и их успеваемостью</h2>
@@ -44,12 +54,12 @@
                 <th>Фамилия</th>
                 <th>Имя</th>
                 <th>Группа</th>
-                <th>Дата поступления</th>
+                <th><f:formatDate value="${s.date}" pattern="yy/MMM/dd"></f:formatDate></th>
 
             </tr>
             <tr>
                 <td><input type="checkbox"></td>
-                <td>Иванов</td>
+                <td>${}</td>
                 <td>Иван</td>
                 <td>23</td>
                 <td>23.02.2000</td>
