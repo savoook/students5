@@ -1,5 +1,6 @@
 package database;
 
+import entity.Account;
 import entity.Discipline;
 import entity.Student;
 import entity.Term;
@@ -73,17 +74,36 @@ public class DBManager {
             e.printStackTrace();
         }
     }
-    public static void deleteDiscipline(String id) {
-        try {
-            Class.forName("com.mysql.jdbc.Driver");
-            Connection con = DriverManager.getConnection(
-                    "jdbc:mysql://localhost/students_control?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC", "root", "estonia");
-            Statement stmt = con.createStatement();
-            stmt.execute("UPDATE `dicsipline` SET `status` = '0' WHERE (`id` = '\"+id+\"');");
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
+
+//    public static Account getAccount(String login, String password, String role) {
+//        try {
+//            Class.forName("com.mysql.jdbc.Driver");
+//            Connection con = DriverManager.getConnection(
+//                    "jdbc:mysql://localhost/students_control?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC", "root", "estonia");
+//            Statement stmt = con.createStatement();
+//            ResultSet rs = stmt.executeQuery("SELECT * FROM account where login = '" + login + "' and password = '" + password + "' and role = '" + role + "';");
+//            Account account = new Account();
+//            account.setId(rs.getInt("id"));
+//            account.setLogin(rs.getString("login"));
+//            account.setPassword(rs.getString("password"));
+//            account.setRole(rs.getString("role"));
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//        }
+//        return null;
+//    }
+
+//    public static void deleteDiscipline(String id) {
+//        try {
+//            Class.forName("com.mysql.jdbc.Driver");
+//            Connection con = DriverManager.getConnection(
+//                    "jdbc:mysql://localhost/students_control?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC", "root", "estonia");
+//            Statement stmt = con.createStatement();
+//            stmt.execute("UPDATE `dicsipline` SET `status` = '0' WHERE (`id` = '\"+id+\"');");
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//        }
+//    }
 
 //    public static List<Term> getAllActivTerns() {
 //        ArrayList<Term> terms = new ArrayList<>();
@@ -174,8 +194,4 @@ public class DBManager {
 //        }
 //        return students;
 //    }
-//
-//
-//
-//
-}
+    }

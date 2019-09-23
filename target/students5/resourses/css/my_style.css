@@ -1,0 +1,89 @@
+* {
+    font-family: "Comic Sans MS";
+    font-size: 30px;
+    /*margin: auto;*/
+    background-color: rgb(238, 238, 238);
+    padding: 5px;
+}
+
+h2 {
+    margin: 0 auto;
+    width: fit-content;
+    border: 2px solid black;
+    background-color: white;
+    /*top: 0;*/
+    /*right: auto;*/
+    /*bottom: 0;*/
+    /*left: auto;*/
+}
+
+.logout {
+    float: right;
+}
+
+.main {
+    float: left;
+}
+
+.container {
+    max-width: 1400px;
+    margin: 0 auto;
+}
+
+.select {
+    float: right;
+
+}
+
+/*.choice {*/
+/*    background-color: white;*/
+/*}*/
+option {
+    background-color: white;
+}
+
+table {
+    border-collapse: collapse;
+}
+
+
+td, th {
+    border: 2px solid black;
+    width: 200px;
+    text-align: center;
+}
+
+.buttonsColumn {
+    /*width: auto;*/
+    float: right;
+    /*margin: 20px;*/
+}
+
+input[type =button] {
+    margin: 5px;
+    /*    float: right;*/
+    width: 600px;
+}
+
+#disciplineChoise {
+    /*float: right;*/
+    width: 400px;
+    vertical-align: top;
+    /*horiz-align: right;*/
+    left: 200px;
+}
+
+.studentsButton {
+    float: right;
+}
+
+.clearfix {
+    content: " ";
+    display: table;
+    clear: both;
+}
+
+input[type=checkbox] {
+    transform: scale(1.9);
+    margin: auto;
+}
