@@ -75,23 +75,7 @@ public class DBManager {
         }
     }
 
-//    public static Account getAccount(String login, String password, String role) {
-//        try {
-//            Class.forName("com.mysql.jdbc.Driver");
-//            Connection con = DriverManager.getConnection(
-//                    "jdbc:mysql://localhost/students_control?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC", "root", "estonia");
-//            Statement stmt = con.createStatement();
-//            ResultSet rs = stmt.executeQuery("SELECT * FROM account where login = '" + login + "' and password = '" + password + "' and role = '" + role + "';");
-//            Account account = new Account();
-//            account.setId(rs.getInt("id"));
-//            account.setLogin(rs.getString("login"));
-//            account.setPassword(rs.getString("password"));
-//            account.setRole(rs.getString("role"));
-//        } catch (Exception e) {
-//            e.printStackTrace();
-//        }
-//        return null;
-//    }
+//
 
 //    public static void deleteDiscipline(String id) {
 //        try {
