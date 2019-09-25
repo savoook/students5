@@ -26,11 +26,12 @@
     <a href="#" class="back">Назад</a>
 </div>
 <div class="boxSite">
+    <form action="/disciplineModify" method="post">
     <div class="box">Система управления студентами и их успеваемостью</div>
     <h2>Для того, чтобы модифицировать дисциплину, введите новое значение поля и нажмите кнопку "Создать"</h2>
     <p><label for="nameDiscipline">Название</label>
         <input type="text" id="nameDiscipline" name="secondName" placeholder="${discipline.discipline}" required autofocus></p>
-    <form action="#">
+        <input type="hidden" name="discId" value="${discipline.id}">
         <button class="buttonModify">Применить</button>
     </form>
 </div>

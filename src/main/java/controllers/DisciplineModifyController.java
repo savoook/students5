@@ -26,6 +26,7 @@ public class DisciplineModifyController extends HttpServlet {
         String newName = req.getParameter("secondName");
         String idDisc = req.getParameter("discId");
         DBManager.modifyDiscipline(newName, idDisc);
+        resp.sendRedirect("/disciplines");
 
     }
 }

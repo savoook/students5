@@ -69,25 +69,24 @@ public class DBManager {
             Connection con = DriverManager.getConnection(
                     "jdbc:mysql://localhost/students_control?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC", "root", "estonia");
             Statement stmt = con.createStatement();
-            stmt.execute("UPDATE `discipline` SET `dicsipline` = '" + newName + "' WHERE (`id` = '" + idDisc + "');\n");
+            stmt.execute("update `students_control`.`discipline` SET `discipline` = '" + newName + "' WHERE (`id` = '" + idDisc + "');\n");
         } catch (Exception e) {
             e.printStackTrace();
         }
     }
 
-//
 
-//    public static void deleteDiscipline(String id) {
-//        try {
-//            Class.forName("com.mysql.jdbc.Driver");
-//            Connection con = DriverManager.getConnection(
-//                    "jdbc:mysql://localhost/students_control?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC", "root", "estonia");
-//            Statement stmt = con.createStatement();
-//            stmt.execute("UPDATE `dicsipline` SET `status` = '0' WHERE (`id` = '\"+id+\"');");
-//        } catch (Exception e) {
-//            e.printStackTrace();
-//        }
-//    }
+
+    public static void deleteDiscipline(String id) {
+        try {
+            Class.forName("com.mysql.cj.jdbc.Driver");
+            Connection con = DriverManager.getConnection("jdbc:mysql://localhost/students_control?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC", "root", "estonia");
+            Statement stmt = con.createStatement();
+            stmt.execute("UPDATE `students_control`.`discipline` SET `status` = '0' WHERE (`id` = '"+id+"');");
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
 
 //    public static List<Term> getAllActivTerns() {
 //        ArrayList<Term> terms = new ArrayList<>();
