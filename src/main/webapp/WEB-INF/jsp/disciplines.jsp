@@ -65,9 +65,9 @@
             </form>
 
 
-                <input type="submit" onclick="deleteDiscipline()" value="Удалить выбранную дисциплину">
-            <form action="/disciplineDelete" id="idDeleteForm">
-                <input type="hidden" name="idDeleteDisc" id="idDeleteDisc">
+            <input type="submit" onclick="deleteDiscipline()" value="Удалить выбранную дисциплину">
+            <form action="/disciplineDelete" id="idsDeleteForm">
+                <input type="hidden" name="idsDeleteDisc" id="idsDeleteDisc">
             </form>
         </div>
     </div>

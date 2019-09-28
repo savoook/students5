@@ -21,9 +21,9 @@ function deleteDiscipline() {
     }
     var ids="";
     for (var i=0; i<checkboxes.length; i++){
-        ids=ids+checkboxes[i].value+","
+        ids=ids+checkboxes[i].value + ",";
     }
 
-    $("#idDeleteDisc").val(ids);
-    $("#idDeleteForm").submit();
+    $("#idsDeleteDisc").val(ids);
+    $("#idsDeleteForm").submit();
 }

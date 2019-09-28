@@ -9,7 +9,7 @@
     <link rel="stylesheet" href="resourses/css/style.css">
 </head>
 <body>
-<%--<div>--%>
+<div>
 <%--    <c:choose>--%>
 <%--        <c:choose>--%>
 <%--            <c:when test="${isLogin eq 1}">--%>
@@ -21,7 +21,7 @@
 <%--        </c:choose>--%>
 <%--    </c:choose>--%>
 
-<%--</div>--%>
+</div>
 <div class="boxSite">
     <div class="box">Система управления студентами и их успеваемостью</div>
     <span>
