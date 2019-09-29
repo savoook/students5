@@ -6,7 +6,7 @@ import java.util.Objects;
 
 public class Term {
     private int id;
-    private String tern;
+    private String term;
     private String duration;
     private int status = 1;
     private List<Discipline> disciplines = new ArrayList<>();
@@ -16,7 +16,7 @@ public class Term {
 
     public Term(int id, String tern, String duration, int status, List<Discipline> disciplines) {
         this.id = id;
-        this.tern = tern;
+        this.term = tern;
         this.duration = duration;
         this.status = status;
         this.disciplines = disciplines;
@@ -31,11 +31,11 @@ public class Term {
     }
 
     public String getTern() {
-        return tern;
+        return term;
     }
 
     public void setTern(String tern) {
-        this.tern = tern;
+        this.term = tern;
     }
 
     public String getDuration() {
@@ -69,21 +69,21 @@ public class Term {
         Term tern1 = (Term) o;
         return id == tern1.id &&
                 status == tern1.status &&
-                Objects.equals(tern, tern1.tern) &&
+                Objects.equals(term, tern1.term) &&
                 Objects.equals(duration, tern1.duration) &&
                 Objects.equals(disciplines, tern1.disciplines);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, tern, duration, status, disciplines);
+        return Objects.hash(id, term, duration, status, disciplines);
     }
 
     @Override
     public String toString() {
         return "Tern{" +
                 "id=" + id +
-                ", tern='" + tern + '\'' +
+                ", tern='" + term + '\'' +
                 ", duration='" + duration + '\'' +
                 ", status=" + status +
                 ", disciplines=" + disciplines +

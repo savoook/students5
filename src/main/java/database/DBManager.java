@@ -1,5 +1,6 @@
 package database;
 
+import com.mysql.cj.x.protobuf.MysqlxDatatypes;
 import entity.Account;
 import entity.Discipline;
 import entity.Student;
@@ -146,7 +147,7 @@ public class DBManager {
 //        }
 //    }
 //
-    public static void createStudents(String newSurname, String newName, String newGroup, String newDate) {
+    public static void createStudents(String newSurname, MysqlxDatatypes.Scalar.String newName, MysqlxDatatypes.Scalar.String newGroup, MysqlxDatatypes.Scalar.String newDate) {
         try {
             Class.forName("com.mysql.jdbc.Driver");
             Connection con = DriverManager.getConnection(
@@ -180,7 +181,6 @@ public class DBManager {
     }
 
 
-    //
 //    public static List<Student> getAllActiveStudents() {
 //        ArrayList<Student> students = new ArrayList<>();
 //        try {
@@ -202,51 +202,49 @@ public class DBManager {
 //            e.printStackTrace();
 //        }
 //        return students;
-//    }
-//    public static List<Term> getAllActiveSemestrs() {
-//        ArrayList<Term> semestrs = new ArrayList<>();
-//        try {
-//            Class.forName("com.mysql.jdbc.Driver");
-//            Connection con = DriverManager.getConnection(
-//                    "jdbc:mysql://localhost/students_control?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC", "root", "estonia");
-//            Statement stmt = con.createStatement();
-//            ResultSet rs = stmt.executeQuery("select * from semestr where status = 1");
-//            while (rs.next()) {
-//                Term semestr = new Term();
-//                semestr.setId(rs.getInt("id"));
-//                semestr.setTern(rs.getString("semestr"));
-//                semestr.setDuration(rs.getString("duration"));
-//
-//                semestrs.add(semestr);
-//            }
-//        } catch (Exception e) {
-//            e.printStackTrace();
-//        }
-//        return semestrs;
-//    }
-//
-//
-//    public static List<Discipline> getDisciplinesInSemestr(String idSem) {
-//        ArrayList<Discipline> disciplinesInSemestr = new ArrayList<>();
-//        try {
-//            Class.forName("com.mysql.jdbc.Driver");
-//            Connection con = DriverManager.getConnection(
-//                    "jdbc:mysql://localhost/students?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC", "root", "vitaly");
-//            Statement stmt = con.createStatement();
-//            ResultSet rs = stmt.executeQuery("select * from semestr_discipline where id_semestr = " + idSem);
-//
-//            while (rs.next()) {
-//                Discipline discipline = new Discipline();
-//                int idDisc = rs.getInt("id_discipline");
-//                discipline.setId(idDisc);
-//                discipline.setDiscipline(rs.getString("discipline"));
-//                disciplinesInSemestr.add(discipline);
-//
-//
-//            }
-//        } catch (Exception e) {
-//            e.printStackTrace();
-//        }
-//        return disciplinesInSemestr;
-//    }
+
+    public static List<Term> getAllActiveTerms() {
+        ArrayList<Term> terms = new ArrayList<>();
+        try {
+            Class.forName("com.mysql.jdbc.Driver");
+            Connection con = DriverManager.getConnection(
+                    "jdbc:mysql://localhost/students_control?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC", "root", "estonia");
+            Statement stmt = con.createStatement();
+            ResultSet rs = stmt.executeQuery("select * from term where status = 1");
+            while (rs.next()) {
+                Term term = new Term();
+                term.setId(rs.getInt("id"));
+                term.setTern(rs.getString("term"));
+                term.setDuration(rs.getString("duration"));
+                terms.add(term);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return terms;
+    }
+
+
+    public static List<Discipline> getDisciplinesInSemestr(String idSem) {
+        ArrayList<Discipline> disciplinesInSemestr = new ArrayList<>();
+        try {
+            Class.forName("com.mysql.jdbc.Driver");
+            Connection con = DriverManager.getConnection(
+                    "jdbc:mysql://localhost/students_control?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC", "root", "estonia");
+            Statement stmt = con.createStatement();
+            ResultSet rs = stmt.executeQuery("SELECT d. id, d.discipline, td.id_term, td.id_discipline  FROM students_control.term_discipline as td left join discipline as d on td.id_discipline =d.id where td.id_term='"+idSem+"');");
+            while (rs.next()) {
+                Discipline discipline = new Discipline();
+                int idDisc = rs.getInt("id_discipline");
+                discipline.setId(idDisc);
+                discipline.setDiscipline(rs.getString("discipline"));
+                disciplinesInSemestr.add(discipline);
+
+
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return disciplinesInSemestr;
+    }
 }

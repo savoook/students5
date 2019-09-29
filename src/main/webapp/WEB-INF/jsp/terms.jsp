@@ -1,64 +1,67 @@
-<%--
-  Created by IntelliJ IDEA.
-  User: User
-  Date: 23.08.2019
-  Time: 20:37
-  To change this template use File | Settings | File Templates.
---%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ page isELIgnored="false" %>
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Семестры</title>
-    <link rel="stylesheet" href="../../resourses/css/my_style.css">
+    <title>Title</title>
+    <link rel="stylesheet" href="../../resourses/css/style.css">
+    <script src="../../resourses/js/functions.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 </head>
 <body>
-<h2>Система управления студентами и их успеваемостью</h2>
-<div>
-    <a href="/login" class="logout">Logout</a>
-</div>
-<div>
-    <a href="/index.jsp" class="main">На главную</a>
-</div>
-<br>
-<div>
-    <a href="#" class="back">Назад</a>
-</div>
-<br>
-<div class="container">
-    <div class="choice">Выбрать семестр
-        <select name="terms" id="">
-            <option value="Семестр1">Семестр1</option>
-            <option value="Семестр2">Семестр2</option>
-            <option value="Семестр3">Семестр3</option>
-            <option value="Семестр4">Семестр4</option>
-        </select>
+<nav class="top-menu">
+    <ul class="menu-main">
+        <li class="left-item"><a href="#">Logout</a></li>
+        <li class="right-item"><a href="/" class="first">На главную</a></li>
+        <li class="right-item"><a href="javascript:history.back()" title="Вернуться на предыдущую страницу">Назад</a>
+        </li>
+    </ul>
+    <div class="box">Система управления студентами и их успеваемостью</div>
+</nav>
+<div class="boxSite">
+    <span>Выбрать семестр</span>
+<%--    <form action="/terms" method="post"></form>--%>
+<%--    <select name="semestr" id="#multipleSelect">--%>
+<%--        <c:forEach items="${terms}" var="t">--%>
+<%--            <option name="idSem" value="${t.id}">${t.term}</option>--%>
+<%--        </c:forEach>--%>
+<%--    </select>--%>
+<%--    <form action="/getDiscinSem" method="get" id="ChoiseSemForm">--%>
+<%--        <input type="submit" value="Выбрать" class="buttonModify" onclick="choiseSem()" id="idChoiseSem">--%>
+<%--    </form>--%>
+
+    <p>Длительность семестра: ${selectedTerm.duration}</p>
+    <div class="firstRow">
+        <div class="table">
+            <div class="tableName">Список дисциплин семестра
+                <div class="table-row">
+                    <div class="table-cellH " style="height: auto">Наименование дисциплины</div>
+                </div>
+                <div class="table-row">
+                    <c:forEach items="${disciplinesInSemestr}" var="ds">
+                        <div class="table-cell" style="height: auto">"${ds.discipline}"</div>
+                    </c:forEach>
+                </div>
+            </div>
+        </div>
     </div>
-    <div class="1">Длительность семестра:24 недели
-    </div>
-    <div class="1">Список дисциплин семестра
-    </div>
-    <div class="buttonsColumn">
-        <input type="button" name="create_term" id="create_term" value="Создать семестр...">
-        <br>
-        <input type="button" name="modyfy_term" id="modyfy_term" value="Модицицировать текущий семестр...">
-        <br>
-        <input type="button" name="delete_term" id="delete_term" value="Удалить текущий семестр...">
-    </div>
-    <div>
-        <table>
-            <th>Наименование дисциплины</th>
-            <tr>
-                <td>Математика</td>
-            </tr>
-            <tr>
-                <td>Химия</td>
-            </tr>
-            <tr>
-                <td>Физика</td>
-            </tr>
-        </table>
+    <div class="secondRow">
+
+
+        <form action="/create-semestr" method="get">
+            <input type="submit" value="Создать семестр" class="buttonModify">
+        </form>
+        <form action="/modify-semestrs" id="modifSemForm">
+            <input type="submit" onclick="modifingSemestr()" value="Модифицировать семестр" class="buttonModify">
+            <input type="hidden" name="idModifSem" id="idModifSem">
+        </form>
+        <form action="/delete-semestr" method="get" id="deleteSemForm">
+            <input type="submit" value="Удалить семестр" onclick="deleteSemestr()" class="buttonModify">
+
+            <input type="hidden" name="idsDeleteSem" id="idsDeleteSem">
+        </form>
     </div>
 </div>
 </body>
