@@ -44,13 +44,13 @@
         <input type="button" name="view_progress" id="view_progress"
                value="Просмотреть успеваемость выбранных студентов">
     </form>
-
-    <input type="button" name="modyfy_student" id="modyfy_student" value="Модицицировать выбранного студента...">
-
-    <form action="/create-students" method="get">
-    <input type="submit" name="create_student" id="create_student" value="Создать студента...">
-    </form>
-    <input type="button" name="delete_student" id="delete_student" value="Удалить выбранного студента...">
+    <c:if test="${role eq 'admin'}">
+        <input type="button" name="modyfy_student" id="modyfy_student" value="Модицицировать выбранного студента...">
+        <form action="/create-students" method="get">
+            <input type="submit" name="create_student" id="create_student" value="Создать студента...">
+        </form>
+        <input type="button" name="delete_student" id="delete_student" value="Удалить выбранного студента...">
+    </c:if>
     <br>
     <br>
     <br>
@@ -74,9 +74,9 @@
                     <td><input type="checkbox"></td>
                     <td>${s.surname}</td>
                     <td>${s.name}</td>
-<%--                    <td>${s.group}</td>--%>
+                        <%--                    <td>${s.group}</td>--%>
                     <td>${s.group}</td>
-<%--                    <td><f:formatDate value="${s.date}" pattern="yy-MMM-dd"></f:formatDate></td>--%>
+                        <%--                    <td><f:formatDate value="${s.date}" pattern="yy-MMM-dd"></f:formatDate></td>--%>
                 </tr>
             </c:forEach>
         </table>
