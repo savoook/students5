@@ -3,10 +3,10 @@
     background-color: rgb(238, 238, 238);
 }
 
-.logout {
+.login {
     float: right;
     text-align: left;
-    vertical-align: bottom;
+    vertical-align: top;
     margin: 30px 8cm 0 0;
 }
 

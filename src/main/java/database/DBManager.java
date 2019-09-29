@@ -76,13 +76,12 @@ public class DBManager {
     }
 
 
-
     public static void deleteDiscipline(String id) {
         try {
             Class.forName("com.mysql.cj.jdbc.Driver");
             Connection con = DriverManager.getConnection("jdbc:mysql://localhost/students_control?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC", "root", "estonia");
             Statement stmt = con.createStatement();
-            stmt.execute("UPDATE `students_control`.`discipline` SET `status` = '0' WHERE (`id` = '"+id+"');");
+            stmt.execute("UPDATE `students_control`.`discipline` SET `status` = '0' WHERE (`id` = '" + id + "');");
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -158,6 +157,28 @@ public class DBManager {
             e.printStackTrace();
         }
     }
+
+    public static Account getAccount(String login, String password, String role) {
+        try {
+            Class.forName("com.mysql.jdbc.Driver");
+            Connection con = DriverManager.getConnection(
+                    "jdbc:mysql://localhost/students_control?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC", "root", "estonia");
+            Statement stmt = con.createStatement();
+            ResultSet rs = stmt.executeQuery("SELECT * FROM students_control.accaunt where login='" + login + "' and password='" + password + "' and role='" + role + "';");
+            while (rs.next()) {
+                Account account = new Account();
+                account.setId(rs.getInt("id"));
+                account.setLogin(rs.getString("login"));
+                account.setPassword(rs.getString("password"));
+                account.setRole(rs.getString("role"));
+                return account;
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
 
     //
 //    public static List<Student> getAllActiveStudents() {

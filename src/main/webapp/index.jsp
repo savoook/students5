@@ -9,19 +9,7 @@
     <link rel="stylesheet" href="resourses/css/style.css">
 </head>
 <body>
-<div>
-<%--    <c:choose>--%>
-<%--        <c:choose>--%>
-<%--            <c:when test="${isLogin eq 1}">--%>
-<%--                <a href="/logout" class="logout">Logout</a>--%>
-<%--            </c:when>--%>
-<%--            <c:otherwise>--%>
-<%--                <a href="/logout" class="login">Login</a>--%>
-<%--            </c:otherwise>--%>
-<%--        </c:choose>--%>
-<%--    </c:choose>--%>
 
-</div>
 <div class="boxSite">
     <div class="box">Система управления студентами и их успеваемостью</div>
     <span>
@@ -33,6 +21,17 @@
     <span>
         <a href="/terms" class="semestrs">Семестры</a>
     </span>
+
 </div>
+<span>
+        <c:choose>
+                <c:when test="${isLogin eq 1}">
+                    <a href="/logout" class="login">Logout</a>
+                </c:when>
+                <c:otherwise>
+                    <a href="/login" class="login">Login</a>
+                </c:otherwise>
+        </c:choose>
+    </span>
 </body>
 </html>
