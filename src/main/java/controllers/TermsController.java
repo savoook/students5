@@ -18,33 +18,24 @@ public class TermsController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         String selectedTermId = req.getParameter("selectedTermId");
+
         List<Term> terms = DBManager.getAllActiveTerms();
-        req.setAttribute("disciplinesByTerm", disciplinesBySTerm);
+        req.setAttribute("terms", terms);
+
         if (selectedTermId == null) {
             req.setAttribute("selectedTerm", terms.get(0));
-            List<Discipline> disciplinesInSemestr = DBManager.getDisciplinesInSemestr(terms.get(0).getId()+"");
-//////        req.setAttribute("disciplinesInSemestr",disciplinesInSemestr);
+            List<Discipline> disciplinesBySelectedTerm = DBManager.getDisciplinesInTerm(terms.get(0).getId() + "");
+            req.setAttribute("disciplinesByTerm", disciplinesBySelectedTerm);
         } else {
-
+            for (Term term : terms) {
+                String TermId = term.getId() + "";
+                if (TermId.equals(selectedTermId)) {
+                    req.setAttribute("selectedTerm", term);
+                    List<Discipline> disciplinesBySelectedTerm = DBManager.getDisciplinesInTerm(term.getId() + "");
+                    req.setAttribute("disciplinesByTerm", disciplinesBySelectedTerm);
+                }
+            }
         }
-        DBManager.getDisciplinesInSemestr(terms.get(0).getId() + "");
-        req.setAttribute("terms", terms);
         req.getRequestDispatcher("/WEB-INF/jsp/terms.jsp").forward(req, resp);
     }
 }
-
-
-//
-//
-////
-////
-//////        String idSem = req.getParameter("idSem");
-//////
-
-////    }
-////
-////    @Override
-////    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-////        super.doPost(req, resp);
-////    }
-////}

@@ -88,30 +88,7 @@ public class DBManager {
         }
     }
 
-    //    public static List<Term> getAllActivTerns() {
-//        ArrayList<Term> terms = new ArrayList<>();
-//        try {
-//            Class.forName("com.mysql.cj.jdbc.Driver");
-//            Connection con = DriverManager.getConnection("jdbc:mysql://localhost/students_control?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC", "root", "estonia");
-//            Statement stmt = con.createStatement();
-//            ResultSet rs = stmt.executeQuery("select*from tern where status='1'");
-//            while (rs.next()) {
-//                Term term = new Term();
-//                term.setId(rs.getInt("id"));
-//                term.setTern(rs.getString("tern"));
-//                term.setDuration(rs.getString("duration"));
-//                terms.add(term);
-//            }
-//        } catch (Exception e) {
-//            e.printStackTrace();
-//        }
-//        return terms;
-//    }
-//
-//    public static void main(String[] args) {
-//        System.out.println(getAllActivDisciplines());
-//    }
-//
+
     public static List<Student> getAllActiveStudents() {
         ArrayList<Student> students = new ArrayList<>();
         try {
@@ -135,21 +112,9 @@ public class DBManager {
         return students;
     }
 
-    //
-//    public static void addDiscipline(String newDisc) {
-//        try {
-//            Class.forName("com.mysql.cj.jdbc.Driver");
-//            Connection con = DriverManager.getConnection("jdbc:mysql://localhost/students_control?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC", "root", "estonia");
-//            Statement stmt = con.createStatement();
-//            stmt.execute("insert into `discipline` (`discipline`) values ('" + newDisc + "')");
-//        } catch (Exception e) {
-//            e.printStackTrace();
-//        }
-//    }
-//
     public static void createStudents(String newSurname, MysqlxDatatypes.Scalar.String newName, MysqlxDatatypes.Scalar.String newGroup, MysqlxDatatypes.Scalar.String newDate) {
         try {
-            Class.forName("com.mysql.jdbc.Driver");
+            Class.forName("com.mysql.cj.jdbc.Driver");
             Connection con = DriverManager.getConnection(
                     "jdbc:mysql://localhost/students_control?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC", "root", "estonia");
             Statement stmt = con.createStatement();
@@ -161,7 +126,7 @@ public class DBManager {
 
     public static Account getAccount(String login, String password, String role) {
         try {
-            Class.forName("com.mysql.jdbc.Driver");
+            Class.forName("com.mysql.cj.jdbc.Driver");
             Connection con = DriverManager.getConnection(
                     "jdbc:mysql://localhost/students_control?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC", "root", "estonia");
             Statement stmt = con.createStatement();
@@ -206,7 +171,7 @@ public class DBManager {
     public static List<Term> getAllActiveTerms() {
         ArrayList<Term> terms = new ArrayList<>();
         try {
-            Class.forName("com.mysql.jdbc.Driver");
+            Class.forName("com.mysql.cj.jdbc.Driver");
             Connection con = DriverManager.getConnection(
                     "jdbc:mysql://localhost/students_control?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC", "root", "estonia");
             Statement stmt = con.createStatement();
@@ -214,7 +179,7 @@ public class DBManager {
             while (rs.next()) {
                 Term term = new Term();
                 term.setId(rs.getInt("id"));
-                term.setTern(rs.getString("term"));
+                term.setTerm(rs.getString("term"));
                 term.setDuration(rs.getString("duration"));
                 terms.add(term);
             }
@@ -225,26 +190,24 @@ public class DBManager {
     }
 
 
-    public static List<Discipline> getDisciplinesInSemestr(String idSem) {
-        ArrayList<Discipline> disciplinesInSemestr = new ArrayList<>();
+    public static List<Discipline> getDisciplinesInTerm(String idTerm) {
+        ArrayList<Discipline> disciplinesInTerm = new ArrayList<>();
         try {
-            Class.forName("com.mysql.jdbc.Driver");
+            Class.forName("com.mysql.cj.jdbc.Driver");
             Connection con = DriverManager.getConnection(
                     "jdbc:mysql://localhost/students_control?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC", "root", "estonia");
             Statement stmt = con.createStatement();
-            ResultSet rs = stmt.executeQuery("SELECT d. id, d.discipline, td.id_term, td.id_discipline  FROM students_control.term_discipline as td left join discipline as d on td.id_discipline =d.id where td.id_term='"+idSem+"');");
+            ResultSet rs = stmt.executeQuery("SELECT d. id, d.discipline, td.id_term, td.id_discipline FROM students_control.term_discipline as td left join discipline as d on td.id_discipline =d.id where td.id_term='" + idTerm + "' and d.status=1");
             while (rs.next()) {
                 Discipline discipline = new Discipline();
                 int idDisc = rs.getInt("id_discipline");
                 discipline.setId(idDisc);
                 discipline.setDiscipline(rs.getString("discipline"));
-                disciplinesInSemestr.add(discipline);
-
-
+                disciplinesInTerm.add(discipline);
             }
         } catch (Exception e) {
             e.printStackTrace();
         }
-        return disciplinesInSemestr;
+        return disciplinesInTerm;
     }
 }

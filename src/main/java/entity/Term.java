@@ -11,17 +11,6 @@ public class Term {
     private int status = 1;
     private List<Discipline> disciplines = new ArrayList<>();
 
-    public Term() {
-    }
-
-    public Term(int id, String tern, String duration, int status, List<Discipline> disciplines) {
-        this.id = id;
-        this.term = tern;
-        this.duration = duration;
-        this.status = status;
-        this.disciplines = disciplines;
-    }
-
     public int getId() {
         return id;
     }
@@ -30,12 +19,12 @@ public class Term {
         this.id = id;
     }
 
-    public String getTern() {
+    public String getTerm() {
         return term;
     }
 
-    public void setTern(String tern) {
-        this.term = tern;
+    public void setTerm(String term) {
+        this.term = term;
     }
 
     public String getDuration() {
@@ -60,33 +49,5 @@ public class Term {
 
     public void setDisciplines(List<Discipline> disciplines) {
         this.disciplines = disciplines;
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        Term tern1 = (Term) o;
-        return id == tern1.id &&
-                status == tern1.status &&
-                Objects.equals(term, tern1.term) &&
-                Objects.equals(duration, tern1.duration) &&
-                Objects.equals(disciplines, tern1.disciplines);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(id, term, duration, status, disciplines);
-    }
-
-    @Override
-    public String toString() {
-        return "Tern{" +
-                "id=" + id +
-                ", tern='" + term + '\'' +
-                ", duration='" + duration + '\'' +
-                ", status=" + status +
-                ", disciplines=" + disciplines +
-                '}';
     }
 }

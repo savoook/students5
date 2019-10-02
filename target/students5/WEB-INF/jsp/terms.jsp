@@ -22,26 +22,33 @@
 </nav>
 <div class="boxSite">
     <span>Выбрать семестр</span>
-<%--    <form action="/terms" method="post"></form>--%>
-<%--    <select name="semestr" id="#multipleSelect">--%>
-<%--        <c:forEach items="${terms}" var="t">--%>
-<%--            <option name="idSem" value="${t.id}">${t.term}</option>--%>
-<%--        </c:forEach>--%>
-<%--    </select>--%>
-<%--    <form action="/getDiscinSem" method="get" id="ChoiseSemForm">--%>
-<%--        <input type="submit" value="Выбрать" class="buttonModify" onclick="choiseSem()" id="idChoiseSem">--%>
-<%--    </form>--%>
+    <form action="/terms" method="get" id="">
+    <select name="selectedTermId" id="selectedTermId">
+        <c:forEach items="${terms}" var="t">
+            <c:choose>
+                <c:when test="${t.id eq selectedTerm.id}">
+                    <option value="${t.id}" selected>${t.term}</option>
+                </c:when>
+                <c:otherwise>
+                    <option value="${t.id}">${t.term}</option>
+                </c:otherwise>
+            </c:choose>
+        </c:forEach>
+    </select>
+    <input type="submit" value="Выбрать" class="buttonModify" id="idChoiseSem">
+
 
     <p>Длительность семестра: ${selectedTerm.duration}</p>
+    </form>
     <div class="firstRow">
         <div class="table">
             <div class="tableName">Список дисциплин семестра
                 <div class="table-row">
-                    <div class="table-cellH " style="height: auto">Наименование дисциплины</div>
+                    <div class="table-cellH ">Наименование дисциплины</div>
                 </div>
                 <div class="table-row">
-                    <c:forEach items="${disciplinesInSemestr}" var="ds">
-                        <div class="table-cell" style="height: auto">"${ds.discipline}"</div>
+                    <c:forEach items="${disciplinesByTerm}" var="dt">
+                        <div class="table-cell" style="height: auto">"${dt.discipline}"</div>
                     </c:forEach>
                 </div>
             </div>

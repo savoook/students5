@@ -39,7 +39,6 @@
 </div>
 <br>
 <div class="container">
-    <c:if test="$(role eq 'admin')"></c:if>
     <form action="/progress" method="get">
         <input type="button" name="view_progress" id="view_progress"
                value="Просмотреть успеваемость выбранных студентов">
