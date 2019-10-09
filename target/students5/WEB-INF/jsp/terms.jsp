@@ -13,7 +13,14 @@
 <body>
 <nav class="top-menu">
     <ul class="menu-main">
-        <li class="left-item"><a href="#">Logout</a></li>
+        <c:choose>
+            <c:when test="${isLogin eq 1}">
+                <a href="/logout" class="login">Logout</a>
+            </c:when>
+            <c:otherwise>
+                <a href="/login" class="login">Login</a>
+            </c:otherwise>
+        </c:choose>
         <li class="right-item"><a href="/" class="first">На главную</a></li>
         <li class="right-item"><a href="javascript:history.back()" title="Вернуться на предыдущую страницу">Назад</a>
         </li>
@@ -48,7 +55,7 @@
                 </div>
                 <div class="table-row">
                     <c:forEach items="${disciplinesByTerm}" var="dt">
-                        <div class="table-cell" style="height: auto">"${dt.discipline}"</div>
+                        <div class="table-cell">"${dt.discipline}"</div>
                     </c:forEach>
                 </div>
             </div>

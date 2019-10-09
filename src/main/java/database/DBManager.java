@@ -1,10 +1,7 @@
 package database;
 
 import com.mysql.cj.x.protobuf.MysqlxDatatypes;
-import entity.Account;
-import entity.Discipline;
-import entity.Student;
-import entity.Term;
+import entity.*;
 import org.w3c.dom.ls.LSOutput;
 
 import java.sql.Connection;
@@ -15,6 +12,27 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class DBManager {
+
+    public static Student getStudentById(String id) {
+        try {
+            Class.forName("com.mysql.cj.jdbc.Driver");
+            Connection con = DriverManager.getConnection("jdbc:mysql://localhost/students_control?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC", "root", "estonia");
+            Statement stmt = con.createStatement();
+            ResultSet rs = stmt.executeQuery("select*from student where status='1' and id=" + id);
+            while (rs.next()) {
+                Student student = new Student();
+                student.setId(rs.getInt("id"));
+                student.setName(rs.getString("name"));
+                student.setSurname(rs.getString("surname"));
+                student.setGroup(rs.getString("group"));
+                student.setData(rs.getDate("data"));
+                return student;
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
 
     public static List<Discipline> getAllActivDisciplines() {
         ArrayList<Discipline> disciplines = new ArrayList<>();
@@ -52,6 +70,7 @@ public class DBManager {
         }
         return null;
     }
+
 
     public static void addDiscipline(String newDisc) {
         try {
@@ -102,7 +121,7 @@ public class DBManager {
                 student.setName(rs.getString("name"));
                 student.setSurname(rs.getString("surname"));
                 student.setGroup(rs.getString("group"));
-                student.setDate(rs.getString("data"));
+                student.setData(rs.getDate("data"));
                 student.setStatus(rs.getInt("status"));
                 students.add(student);
             }
@@ -146,28 +165,6 @@ public class DBManager {
     }
 
 
-//    public static List<Student> getAllActiveStudents() {
-//        ArrayList<Student> students = new ArrayList<>();
-//        try {
-//            Class.forName("com.mysql.jdbc.Driver");
-//            Connection con = DriverManager.getConnection(
-//                    "jdbc:mysql://localhost/students_control?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC", "root", "estonia");
-//            Statement stmt = con.createStatement();
-//            ResultSet rs = stmt.executeQuery("select * from student where status = 1");
-//            while (rs.next()) {
-//                Student student = new Student();
-//                student.setId(rs.getInt("id"));
-//                student.setSurname(rs.getString("surname"));
-//                student.setName(rs.getString("name"));
-//                student.setGroup(rs.getString("group"));
-//                student.setDate(rs.getString("date"));
-//                students.add(student);
-//            }
-//        } catch (Exception e) {
-//            e.printStackTrace();
-//        }
-//        return students;
-
     public static List<Term> getAllActiveTerms() {
         ArrayList<Term> terms = new ArrayList<>();
         try {
@@ -197,7 +194,7 @@ public class DBManager {
             Connection con = DriverManager.getConnection(
                     "jdbc:mysql://localhost/students_control?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC", "root", "estonia");
             Statement stmt = con.createStatement();
-            ResultSet rs = stmt.executeQuery("SELECT d. id, d.discipline, td.id_term, td.id_discipline FROM students_control.term_discipline as td left join discipline as d on td.id_discipline =d.id where td.id_term='" + idTerm + "' and d.status=1");
+            ResultSet rs = stmt.executeQuery("SELECT d. id, d.discipline, td.id_term, td.id_discipline FROM students_control.term_discipline as td left join discipline as d on td.id_discipline =d.id where td.id_term='" + idTerm + "'");
             while (rs.next()) {
                 Discipline discipline = new Discipline();
                 int idDisc = rs.getInt("id_discipline");
@@ -209,5 +206,58 @@ public class DBManager {
             e.printStackTrace();
         }
         return disciplinesInTerm;
+    }
+
+    public static void modifyStudent(String newSurname, String newName, String newGroup, String newData, String idSt) {
+        try {
+            Class.forName("com.mysql.jdbc.Driver");
+            Connection con = DriverManager.getConnection(
+                    "jdbc:mysql://localhost/students_control?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC", "root", "estonia");
+            Statement stmt = con.createStatement();
+            stmt.execute("UPDATE `students_control`.`student` SET `surname` = '" + newSurname + "', `name` = '" + newName + "', `group` = '" + newGroup + "', `data` = '" + newData + "' WHERE (`id` = '" + idSt + "');\n");
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    public static void deleteStudents(String id) {
+        try {
+            Class.forName("com.mysql.jdbc.Driver");
+            Connection con = DriverManager.getConnection(
+                    "jdbc:mysql://localhost/students_control?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC", "root", "estonia");
+            Statement stmt = con.createStatement();
+            stmt.execute("UPDATE `students_control`.`student` SET `status` = '0' WHERE (`id` = '" + id + "');");
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    public static List<Marks> getMarksByStudentTern(String idSt, int id) {
+        ArrayList<Marks> marks = new ArrayList<>();
+        try {
+            Class.forName("com.mysql.cj.jdbc.Driver");
+            Connection con = DriverManager.getConnection(
+                    "jdbc:mysql://localhost/students_control?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC", "root", "estonia");
+            Statement stmt = con.createStatement();
+            ResultSet rs = stmt.executeQuery("SELECT * FROM students_control.mark\n" +
+                    "  left join term_discipline as t_d on mark.id_tern_discipline =t_d.id\n" +
+                    "  left join discipline as d on t_d.id_discipline=d.id\n" +
+                    "  left join term as t on t_d.id_term=t.id\n" +
+                    "  where id_student='" + idSt + "' and t_d.id_term='" + id + "' \n" +
+                    "  and d.status=1 and t.status=1;");
+            while (rs.next()) {
+                Marks mark = new Marks();
+                Discipline discipline = new Discipline();
+                discipline.setId(rs.getInt("id_discipline"));
+                discipline.setDiscipline(rs.getString("discipline"));
+                discipline.setStatus(1);
+                mark.setDiscipline(discipline);
+                mark.setMark(rs.getString("mark"));
+                marks.add(mark);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return marks;
     }
 }

@@ -9,11 +9,12 @@
 //import javax.servlet.http.HttpServletResponse;
 //import java.io.IOException;
 //
-//@WebServlet(name = "StudentsCreateController", urlPatterns ="/create-students" )
+//@WebServlet(name = "StudentsCreateController", urlPatterns ="/studentsCreate" )
 //
 //public class StudentsCreateController extends HttpServlet {
 //    @Override
 //    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+//        req.getParameter("")
 //        req.getRequestDispatcher("/WEB-INF/jsp/create-students.jsp").forward(req,resp);
 //    }
 //
